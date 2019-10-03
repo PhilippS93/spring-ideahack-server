@@ -24,4 +24,10 @@ public class TrashCan {
     private TrashCanType type;
 
     private double capacity;
+
+    private double longitude;
+
+    private double latitude;
+
+
 }
