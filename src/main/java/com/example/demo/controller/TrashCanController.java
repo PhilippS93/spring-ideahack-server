@@ -5,8 +5,12 @@ import com.example.demo.dao.TrashCanEntryDAO;
 import com.example.demo.model.TrashCan;
 import com.example.demo.model.TrashCanEntry;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +31,7 @@ public class TrashCanController {
     }
 
     @PostMapping("/{id}")
-    private TrashCanEntry saveTrashCans(@PathVariable String id, @RequestBody TrashCanEntry entry) {
+    private TrashCanEntry saveTrashCans(@PathVariable String id, double kg) {
         Optional<TrashCan> trashCanOptional = trashCanDAO.findById(id);
 
         if (trashCanOptional.isEmpty()) {
@@ -35,6 +39,12 @@ public class TrashCanController {
         }
 
         TrashCan trashCan = trashCanOptional.get();
+
+        TrashCanEntry entry = TrashCanEntry.builder()
+                .kg(kg)
+                .price(kg * 0.3)
+                .date(new Date())
+                .build();
 
         entry = trashCanEntryDAO.save(entry);
 
