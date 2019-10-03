@@ -28,7 +28,7 @@ public class TrashCanController {
     }
 
     @PostMapping("/{id}")
-    private TrashCanEntry saveTrashCans(@PathVariable String id, @RequestParam double kg) {
+    private TrashCanEntry saveTrashCans(@PathVariable("id") String id, @RequestParam double kg) {
         Optional<TrashCan> trashCanOptional = trashCanDAO.findById(id);
 
         if (trashCanOptional.isEmpty()) {
