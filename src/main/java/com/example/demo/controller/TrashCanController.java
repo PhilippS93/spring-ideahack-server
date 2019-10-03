@@ -20,6 +20,7 @@ public class TrashCanController {
     @Autowired
     private TrashCanEntryDAO trashCanEntryDAO;
 
+    @CrossOrigin
     @GetMapping()
     private List<TrashCan> getTrashCans() {
         List<TrashCan> trashCans = trashCanDAO.findAll();
@@ -27,6 +28,7 @@ public class TrashCanController {
         return trashCans;
     }
 
+    @CrossOrigin
     @PostMapping("/{id}")
     private TrashCanEntry saveTrashCans(@PathVariable("id") String id, @RequestParam double kg) {
         Optional<TrashCan> trashCanOptional = trashCanDAO.findById(id);
